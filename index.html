@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    
+    <script type="text/javascript" src="app.js"></script>
+    <title>Consumo energetico</title>
+</head>
+
+<body>
+
+   
+   
+
+    <section class="container">
+         <header>
+        <h2>Aplicación para calcular el consumo energético de tu hogar </h2>
+        <br>
+        <img class="img-logo" src="img/electricidad.png" alt="Cfe Logo Comision Federal De Electricidad Png - Sport Club Internacional Clipart@pikpng.com">
+        <p>Esta aplicación web es ajena a la comisión federal de electricidad (CFE). </p>
+        <br>
+        <p><b> ¿Como funciona la aplicación web?</b></p>
+       
+         <button class="btn btn-primary" type="button" id="boton" onclick="location.href='funcion.html'" >Aceptar</button>
+    </header>
+
+
+
+        <div class="row">
+
+            <article class="col-sm-12 col-md-12">
+                <br>
+                             
+                <div class="aplica">
+                    <form>   <!-- formulario para ingresar los equipos electronicos -->
+                        <div class="form-group">
+                            <table class="tabla"><!-- ****** tabla donde se ingresan los equipos electronicos a calcular -->
+                                <th colspan="2">  <!-- colpan se utiliza para albergar dos columnas de la tabla -->
+                                    <div class="centrar">
+                                        <h2>INGRESE DATOS</h2>
+                                    </div>
+                                </th>
+                                <tr>
+                                    <th>
+                                        <label> Tipo de equipo:</label>
+                                    </th>
+                                    <td>
+                                        <input id="equipo" class="for-control" type="text" placeholder="Nombre del Equipo." name="equipo"
+                     pattern="[a-zA-Z]+"><br>
+                                       
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <label>Consumo en watts:</label>
+                                    </th>
+                                    <td>
+                                        <input  id="consumo" class="for-control" type="text" placeholder="num Watts." name="numeros" pattern="[0-9]+" step="0.01" ><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <label>Cantidad de equipos:</label>
+                                    </th>
+                                    <td>
+                                        <input id="numero" class="for-control" type="text" placeholder="Cantidad."  pattern="[0-9]+" step="0.01" ><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <label>Horas de consumo</label>
+                                    </th>
+                                    <td>
+                                        <input id="horas" class="for-control" type="text" placeholder="Horas"  pattern="[0-9]" step="0.01"><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <label>cuantos dias lo utilizas</label>
+                                    </th>
+                                    <td>
+                                        <input id="dia" class="for-control" type="text" placeholder="num dias"  pattern="[0-9]+" step="0.01"><br>
+                                    </td>
+                                </tr>
+                                <th colspan="2">
+                                    <div class="centrar">
+                                        <!-- este boton llama dos funciones una por id y la otra por onclik-->
+                                        <button id="adicionar" class="btn btn-primary" type="button"
+                                            onclick="ejemplo();">Aceptar</button>
+                                    </div>
+
+                                </th>
+
+                            </table>
+
+                        </div>
+                    </form>
+                            <!-- tabla donde  se alamacena  los datos del formulario entrada de equipos-->
+                           
+                    <table class="tabla-agredados"> <!-- tabla de encabezado -->
+                        <td colspan="8">
+                           <!-- el encabezado abarca todas las columnas -->
+                            <h2>Equipos agregados</h2>
+                        </td>
+                    </table>
+                    <div class="table-responsive-sm"> <!-- para comvertir la tabla a resposiva con el uso de boostrap-->
+                       <!-- tabla donde se almacenan los datos -->
+                        <table id="mytable" class="table table-bordered table-hover ">
+
+                            <tr>
+                                <td>Equipo</td>
+                                <td>Consumo</td>
+                                <td>Cantidad</td>
+                                <td>Horas</td>
+                                <td>Watts/Dia</td>
+                                <td>Kw/Dia</td>
+                                <td>Dias del mes</td>
+                                <td>Kw/Mes</td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <table>
+                        <td>
+                            <h4>total: </h4>
+                        </td>
+                        <td>
+                            <input type="text" id="resultados" class="for-control" disabled value="0">
+                        </td>
+                        <td>
+                            <div class="centrar">
+                                <button id="adicionar" class="btn btn-primary" type="button"
+                                    onclick="ejemplo()">Calcular</button>
+                            </div>
+                        </td>
+                    </table>
+
+                    <br>
+
+                    <table class="consumo-dias">
+                        <td colspan="2">
+                            <h4>Total de consumo por dias</h4>
+                        </td>
+                        <td>
+                            <input type="text" id="acomulado1" class="for-control" disabled value="0">
+                        </td>
+
+                    </table>
+
+                    <table>
+                        <thead>
+                            <td colspan="2">
+                                <div class="centrar">
+                                    <h4>Ingrese los precios de lista del servicio</h4>
+                                </div>
+                            </td>
+                        </thead>
+                        <form>
+                            <div class="form-group">
+
+                                <!-- precios -->
+
+                                <tr>
+                                    <td>
+                                        <label>Baisco</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="basico" class="for-control" placeholder="Precio">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Intermedio</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="intermedio" class="for-control" placeholder="Precio">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Excedente</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="exedente" class="for-control" placeholder="Precio">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="centrar">
+                                            <button id="calcular" class="btn btn-primary" type="button">Aceptar</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <br>
+                            </div>
+                        </form>
+                    </table>
+
+
+                    <div class="table-responsive-sm">
+
+                        <table>
+                            <thead>
+                                <td>
+                                    <h6>Niveles de acuerdo a CFE</h6>
+                                </td>
+                                <td class="color1">Basico (apartir de los primeros 150kw)</td>
+                                <td class="color2">Intermedio (apartir de los de 130kw)</td>
+                                <td class="color3">Exedente (apartir de sobre pasar los 280kw )</td>
+                            </thead>
+                        </table>
+                        
+                        <table class="table-responsive-sm   niveles">
+                            <thead>
+                                <tr>
+                                    <td>NIVEL</td>
+                                    <th id="color1.1">basico</th>
+                                    <th id="color2.2">intermedio</th>
+                                    <th id="color3.3">execente</th>
+                                </tr>
+                            </thead>
+
+                            <tr>
+                                <td>Total KWH por mes</td>
+                                <td><input type="text" id="basi1" class="for-control" disabled value="0"></td>
+                                <td><input type="text" id="inter1" class="for-control" disabled value="0"></td>
+                                <td><input type="text" id="exeden1" class="for-control" disabled value="0"></td>
+                            </tr>
+                            <tr>
+                                <td>Precio por KWH</td>
+                                <td><input type="text" id="precio1" class="for-control" disabled value="0"></td>
+                                <td><input type="text" id="precio2" class="for-control" disabled value="0"></td>
+                                <td><input type="text" id="precio3" class="for-control" disabled value="0"></td>
+                            </tr>
+                            <td>Precio KWH por mes</td>
+                            <td><input type="text" id="total1" class="for-control" disabled value="0"></td>
+                            <td><input type="text" id="total2" class="for-control" disabled value="0"></td>
+                            <td><input type="text" id="total3" class="for-control" disabled value="0"></td>
+
+                        </table>
+
+                    </div>
+
+                    <table>
+                        <form class="iva">
+                            <td>
+                                <h5>
+                                    Ingrese el IVA
+                                </h5>
+                            </td>
+                            <td>
+                                <input type="text" id="iva" class="for-control" placeholder="ingrese numero">
+                            </td>
+                            <td>
+                                <button id="calcula" class="btn btn-primary" type="button">Aceptar</button>
+                            </td>
+                        </form>
+                    </table>
+
+                    <br>
+                    <table id="resultado" class="tabla-final">
+
+                        <tr>
+                            <td colspan="3">
+                                <div class="centrar">
+                                    <h4>Resultado final </h4>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sub-total</td>
+                            <td colspan="3"><input type="text" id="subtotal" class="for-control" disabled value="0">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>I.V.A </td>
+                            <td><input type="text" id="rIva" class="for-control" disabled value="0"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Sub-total final </td>
+                            <td><input type="text" id="subfinal" class="for-control" disabled value="0"></td>
+                            <th id="colorfinal">
+                                <!-- div para pintar la celda -->
+                                <h6>
+                                    <div id="colorfinal2"></div> <!-- es la celda que sera pintada -->
+                                </h6>
+                            </th>
+                        </tr>
+                        <tr>
+
+                            <td colspan="3">
+                                <div class="centrar">
+                                    <a href="index.html" type="button" class="btn btn-primary">Limpiar </a>
+                                </div>
+                            </td>
+
+                        </tr>
+
+
+                    </table>
+
+                    <!--  ************ valores que se utilizan para obtener los resultados ************** -->
+                    <!-- ****  no eliminar estos valores, solo se ocultaron ya se utilizan para  -->
+                    <!-- ****  obtener otros valores dentro del javascrip -->
+                    <div class="valor-oculto">
+                        <p>E:
+                        <div id="adicionados"></div> <!-- se encuentra en la linea 28 del javascrip-->
+                        </p>
+                    </div>
+
+                    <div class="valor-oculto">
+                        <p>v:
+                        <div id="acomulado"></div>
+                        </p>
+                    </div>
+
+                </div>
+
+            </article>
+        </div>
+    
+
+
+    
+        
+    
+
+   
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>
